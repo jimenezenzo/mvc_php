@@ -7,15 +7,11 @@ namespace Composer\Autoload;
 class ComposerStaticInit41b3b512e330f22ae7f440682979bd3e
 {
     public static $files = array (
-        '0e6d7bf4a5811bfa5cf40c5ccd6fae6a' => __DIR__ . '/..' . '/symfony/polyfill-mbstring/bootstrap.php',
         '320cde22f66dd4f5d3fd621d3e88b98f' => __DIR__ . '/..' . '/symfony/polyfill-ctype/bootstrap.php',
+        '0e6d7bf4a5811bfa5cf40c5ccd6fae6a' => __DIR__ . '/..' . '/symfony/polyfill-mbstring/bootstrap.php',
     );
 
     public static $prefixLengthsPsr4 = array (
-        'W' => 
-        array (
-            'Workerman\\' => 10,
-        ),
         'T' => 
         array (
             'Twig\\' => 5,
@@ -27,12 +23,7 @@ class ComposerStaticInit41b3b512e330f22ae7f440682979bd3e
         ),
         'P' => 
         array (
-            'PHPSocketIO\\' => 12,
             'PHPMailer\\PHPMailer\\' => 20,
-        ),
-        'C' => 
-        array (
-            'Channel\\' => 8,
         ),
         'A' => 
         array (
@@ -41,10 +32,6 @@ class ComposerStaticInit41b3b512e330f22ae7f440682979bd3e
     );
 
     public static $prefixDirsPsr4 = array (
-        'Workerman\\' => 
-        array (
-            0 => __DIR__ . '/..' . '/workerman/workerman',
-        ),
         'Twig\\' => 
         array (
             0 => __DIR__ . '/..' . '/twig/twig/src',
@@ -57,17 +44,9 @@ class ComposerStaticInit41b3b512e330f22ae7f440682979bd3e
         array (
             0 => __DIR__ . '/..' . '/symfony/polyfill-ctype',
         ),
-        'PHPSocketIO\\' => 
-        array (
-            0 => __DIR__ . '/..' . '/workerman/phpsocket.io/src',
-        ),
         'PHPMailer\\PHPMailer\\' => 
         array (
             0 => __DIR__ . '/..' . '/phpmailer/phpmailer/src',
-        ),
-        'Channel\\' => 
-        array (
-            0 => __DIR__ . '/..' . '/workerman/channel/src',
         ),
         'App\\' => 
         array (

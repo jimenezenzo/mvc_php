@@ -1,9 +1,8 @@
 {
-    "name": "illuminate-example/eloquent",
+    "name": "PHP MVC",
     "type": "project",
     "description": "Mi mvc editado",
     "require": {
-        "workerman/phpsocket.io": "^1.1",
         "phpmailer/phpmailer": "^6.3",
         "twig/twig": "^3.0"
     },

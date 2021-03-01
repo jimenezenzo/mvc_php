@@ -2,16 +2,10 @@
 namespace App\controller;
 use \App\model\User;
 use \App\core\Email;
+use \App\core\View;
 
 class UserController
 {
-    private $renderer;
-
-    public function __construct($renderer)
-    {
-        $this->renderer = $renderer;
-    }
-
     public function login()
     {
         $data["email"] = $_POST['email'];
@@ -24,7 +18,7 @@ class UserController
         }
 
         if (!empty($errores)) {
-            echo $this->renderer->render("auth/login.html", ["errores" => $errores]);
+            View::render("auth/login.html", ["errores" => $errores]);
             die();
         }
 
@@ -39,7 +33,7 @@ class UserController
             }
 
             $errores[] = "Usuario o contraseña incorrecto";
-            echo $this->renderer->render("auth/login.html", ["errores" => $errores]);
+            View::render("auth/login.html", ["errores" => $errores]);
             die();
         } catch (Exception $e) {
             echo "error capturado: ".$e->getMessage();
@@ -74,7 +68,7 @@ class UserController
         }
 
         if (!empty($errores)) {
-            echo $this->renderer->render("auth/registro.html", ["errores" => $errores]);
+            View::render("auth/registro.html", ["errores" => $errores]);
             die();
         }
 

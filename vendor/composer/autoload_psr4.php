@@ -6,12 +6,9 @@ $vendorDir = dirname(dirname(__FILE__));
 $baseDir = dirname($vendorDir);
 
 return array(
-    'Workerman\\' => array($vendorDir . '/workerman/workerman'),
     'Twig\\' => array($vendorDir . '/twig/twig/src'),
     'Symfony\\Polyfill\\Mbstring\\' => array($vendorDir . '/symfony/polyfill-mbstring'),
     'Symfony\\Polyfill\\Ctype\\' => array($vendorDir . '/symfony/polyfill-ctype'),
-    'PHPSocketIO\\' => array($vendorDir . '/workerman/phpsocket.io/src'),
     'PHPMailer\\PHPMailer\\' => array($vendorDir . '/phpmailer/phpmailer/src'),
-    'Channel\\' => array($vendorDir . '/workerman/channel/src'),
     'App\\' => array($baseDir . '/app'),
 );

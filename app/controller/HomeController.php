@@ -1,15 +1,12 @@
 <?php
 namespace App\controller;
 use \App\model\User;
+use \App\core\View;
 
 class HomeController
 {
-    private $renderer;
-
-    public function __construct($renderer)
+    public function __construct()
     {
-        $this->renderer = $renderer;
-
         if (!isset($_SESSION['auth'])){
             header('Location: /');
         }
@@ -17,7 +14,7 @@ class HomeController
 
     public function index()
     {
-        echo $this->renderer->render("inicio/home.html");
+        View::render("inicio/home.html");
     }
 
-}    
+}
