@@ -1,0 +1,67 @@
+@import url('https://fonts.googleapis.com/css2?family=Roboto&display=swap');
+
+*{
+    margin: 0;
+    padding: 0;
+    font-family: 'Roboto', sans-serif;
+}
+
+body{
+    font-size: 90%;
+    background-color: #F0F0F0;
+    line-height: 1.5em;
+}
+
+header > nav > div{
+    font-size: 18px;
+}
+
+footer{
+
+}
+
+.icono-menu{
+    font-size: 60px;
+    color: #25c4af;
+}
+
+.icono-viaje{
+    font-size: 40px;
+    color: #b4b4b4;
+}
+
+.formulario{
+    background-color: white;
+    padding: 10px 15px;
+    border-radius: 8px;
+
+    -webkit-box-shadow: 0px 0px 6px -2px rgba(0,0,0,0.75);
+    -moz-box-shadow: 0px 0px 6px -2px rgba(0,0,0,0.75);
+    box-shadow: 0px 0px 6px -2px rgba(0,0,0,0.75);
+}
+
+#map {
+    height: 380px;
+    border-radius: 8px;
+
+    -webkit-box-shadow: 0px 0px 6px -2px rgba(0,0,0,0.75);
+    -moz-box-shadow: 0px 0px 6px -2px rgba(0,0,0,0.75);
+    box-shadow: 0px 0px 6px -2px rgba(0,0,0,0.75);
+}
+
+.imagen{
+    width: 30px;
+}
+
+.carga{
+    cursor: pointer;
+}
+
+.carga:hover{
+    background-color: #74c2f2;
+    color: white;
+}
+
+.opciones{
+    display: none;
+}
