@@ -16,6 +16,11 @@
                         </ul>
                     </div>
                 {% endif %}
+                {% if status %}
+                    <div class='alert alert-success mt-2' role='alert'>
+                        <p>{{status}}</p>
+                    </div>
+                {% endif %}
                 <form action="/registrarse" method="post">
                     <div class="d-md-flex">
                         <div class="form-group col-md-6 pl-md-0">

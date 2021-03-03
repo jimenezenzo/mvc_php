@@ -2,14 +2,13 @@
 namespace App\controller;
 use \App\model\User;
 use \App\core\View;
+use \App\Traits\Auth;
 
 class HomeController
 {
     public function __construct()
     {
-        if (!isset($_SESSION['auth'])){
-            header('Location: /');
-        }
+        Auth::checkAuth();
     }
 
     public function index()

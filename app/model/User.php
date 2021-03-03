@@ -33,9 +33,9 @@ class User extends Database
 		$nombre = $data["nombre"];
 		$apellido = $data["apellido"];
 		$email = $data["email"];
-		$password = $data["password"];
+		$password = md5($data["password"]);
 		$verificado = "N";
-		$token = "asdfghjkkñ";
+		$token = $data["token"];
 		$created_at = date("Y-m-d H:i:s");
 		$stmt->execute();
 

@@ -25,6 +25,13 @@ class UserController
         try {
             $user = User::findEmail($data["email"]);
             if (!empty($user)) {
+                if ($user->verificado === "N") {
+                    $errores[] = "Tenes que verificar tu cuenta";
+                    $_SESSION['errores'] = $errores;
+                    header('Location: /login');
+                    die();
+                }
+
                 if (md5($data["contraseña"]) === $user->password) {
                     $_SESSION['auth'] = $user;
                     header('Location: /home');
@@ -32,11 +39,14 @@ class UserController
                 }
             }
 
-            $errores[] = "Usuario o contraseña incorrecto";
-            View::render("auth/login.html", ["errores" => $errores]);
+            $errores[] = "Email o contraseña incorrecta";
+            $_SESSION['errores'] = $errores;
+            header('Location: /login');
             die();
         } catch (Exception $e) {
-            echo "error capturado: ".$e->getMessage();
+            $_SESSION['errores'] = "Hubo un error: ".$e->getMessage();
+            header('Location: /login');
+            die();
         }
         
     }
@@ -47,6 +57,7 @@ class UserController
         $data["email"] = $_POST["email"];
         $data["password"] = $_POST["password"];
         $data["password_repet"] = $_POST["password_repet"];
+        $data["token"] = $this->generateRandomString();
 
         foreach ($data as $da => $valor) {
             if (empty($valor)) {
@@ -68,30 +79,35 @@ class UserController
         }
 
         if (!empty($errores)) {
-            View::render("auth/registro.html", ["errores" => $errores]);
+            $_SESSION['errores'] = $errores;
+            header('Location: /registro');
             die();
         }
 
         try {
             User::create($data);
-            echo "Usuario creado";
+            // $mail = new Email();
+            // $vista = "<p> Hola bienvenido a la web, confirma tu cuenta </p>";
+            // $mail->enviarEmail($email, 'Confirmar cuenta', $vista);
+            $_SESSION["status"] = "Usuario creado correctamente";
+            header("Location: /registro");
+            die();
         } catch (Exception $e) {
-            echo "Error al registrar ".$e->getMessage();
+            $_SESSION['errores'] = "Error al registrar ".$e->getMessage();
+            header('Location: /registro');
+            die();
         }
     }
 
-    public function enviarEmail()
-    {
-        $mail = new Email();
-
-        try {
-            $vista = "<p> Hola bienvenido a la web </p>";
-            $mail->enviarEmail('enzo-jimenez@hotmail.com', 'Bienvenida', $vista);
-            echo "mail enviado";    
-        } catch (Exception $e) {
-            echo "Message could not be sent. Mailer Error: {$mail->ErrorInfo}";
+    public function generateRandomString($length = 10) {
+        $characters = '0123456789abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ';
+        $charactersLength = strlen($characters);
+        $randomString = '';
+        for ($i = 0; $i < $length; $i++) {
+            $randomString .= $characters[rand(0, $charactersLength - 1)];
         }
-    }
+        return $randomString;
+    } 
 
     public function logout()
     {
