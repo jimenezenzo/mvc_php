@@ -1,6 +1,6 @@
 <?php
-namespace App\core;
-use App\core\Config;
+namespace App\Core;
+use App\Core\Config;
 use \mysqli;
 
 abstract class Database{

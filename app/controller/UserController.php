@@ -1,8 +1,8 @@
 <?php
-namespace App\controller;
-use \App\model\User;
-use \App\core\Email;
-use \App\core\View;
+namespace App\Controller;
+use \App\Model\User;
+use \App\Core\Email;
+use \App\Core\View;
 
 class UserController
 {

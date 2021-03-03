@@ -1,6 +1,6 @@
 <?php
-namespace App\controller;
-use \App\core\View;
+namespace App\Controller;
+use \App\Core\View;
 
 class InicioController
 {

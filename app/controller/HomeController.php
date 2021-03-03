@@ -1,7 +1,7 @@
 <?php
-namespace App\controller;
-use \App\model\User;
-use \App\core\View;
+namespace App\Controller;
+use \App\Model\User;
+use \App\Core\View;
 use \App\Traits\Auth;
 
 class HomeController
