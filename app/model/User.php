@@ -27,19 +27,22 @@ class User extends Database
 	public static function create($data)
 	{
 		$conn = parent::connection();
-		$stmt = $conn->prepare("INSERT INTO users (nombre, apellido, email, password, verificado, token, created_at) VALUES (?, ?, ?, ?, ?, ?, ?)");
-		$stmt->bind_param("sssssss", $nombre, $apellido, $email, $password, $verificado, $token, $created_at);
+		if ($stmt = $conn->prepare("INSERT INTO users (nombre, apellido, email, password, verificado, token, created_at) VALUES (?, ?, ?, ?, ?, ?, ?)")) {
+			
+			$stmt->bind_param("sssssss", $nombre, $apellido, $email, $password, $verificado, $token, $created_at);
 
-		$nombre = $data["nombre"];
-		$apellido = $data["apellido"];
-		$email = $data["email"];
-		$password = md5($data["password"]);
-		$verificado = "N";
-		$token = $data["token"];
-		$created_at = date("Y-m-d H:i:s");
-		$stmt->execute();
+			$nombre = $data["nombre"];
+			$apellido = $data["apellido"];
+			$email = $data["email"];
+			$password = password_hash($data["password"], PASSWORD_BCRYPT);
+			$verificado = "N";
+			$token = $data["token"];
+			$created_at = date("Y-m-d H:i:s");
+			$stmt->execute();
 
-		$stmt->close();
+			$stmt->close();
+		}
+		
 		$conn->close();
 	}
 

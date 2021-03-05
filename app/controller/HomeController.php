@@ -8,12 +8,12 @@ class HomeController
 {
     public function __construct()
     {
-        Auth::checkAuth();
+        Auth::verifyAuth();
     }
 
     public function index()
     {
-        View::render("inicio/home.html");
+        View::render("inicio/home.html", ["user" => Auth::getUser()]);
     }
 
 }

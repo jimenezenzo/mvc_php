@@ -32,7 +32,8 @@ class UserController
                     die();
                 }
 
-                if (md5($data["contraseña"]) === $user->password) {
+                if (password_verify($data["contraseña"], $user->password)) {
+                    session_regenerate_id();
                     $_SESSION['auth'] = $user;
                     header('Location: /home');
                     die();

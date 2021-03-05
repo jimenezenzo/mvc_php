@@ -2,77 +2,47 @@
 namespace App\Core;
 
 class Router{
-    
+    private static $rutas = array();
+
     public static function executeActionFromController($module)
     {
-        $rutas = self::rutas();
-        $module = self::removeQueryStringVariables($module);
+        $rutas = static::$rutas;
         
         if (array_key_exists($module, $rutas)) {
             $namespace = $rutas[$module]["namespace"];
             $namespace = str_replace("/", "\\", $namespace);
             $action = $rutas[$module]["action"];
             $controller = PATH_CONTROLLER.$namespace;
+            $method = $rutas[$module]["method"];
 
-            if (class_exists($controller)) {
+            if (class_exists($controller) && method_exists($controller, $action)) {
 
-                if (method_exists($controller, $action)) {
+               if ($_SERVER["REQUEST_METHOD"] === $method) {
 
                     $controller_object = new $controller();
                     return call_user_func(array($controller_object, $action));
                 }
-            }
-        }
-        
-        echo "Error 404";
-    }
+                else{
 
-    public static function removeQueryStringVariables($url)
-    {
-        if ($url != '') {
-            $parts = explode('&', $url, 2);
-
-            if (strpos($parts[0], '=') === false) {
-                $url = $parts[0];
-            } else {
-                $url = '';
+                    http_response_code(405);
+                    echo "405 Method Not Allowed";
+                    die();
+                }
             }
         }
 
-        return $url;
+        http_response_code(404);
+        echo "404 Not Found";
     }
 
-    public static function rutas()
+    public static function add($ruta, $controller, $action, $method)
     {
-        return $rutas = [
-            "/" => array(
-                "namespace" => "InicioController",
-                "action" => "index"
-            ),
-            "login" => array(
-                "namespace" => "InicioController",
-                "action" => "ingresar"
-            ),
-            "registro" => array(
-                "namespace" => "InicioController",
-                "action" => "registro"
-            ),
-            "ingresar" => array(
-                "namespace" => "UserController",
-                "action" => "login"
-            ),
-            "registrarse" => array(
-                "namespace" => "UserController",
-                "action" => "register"
-            ),
-            "logout" => array(
-                "namespace" => "UserController",
-                "action" => "logout"
-            ),
-            "home" => array(
-                "namespace" => "HomeController",
-                "action" => "index"
-            )
-        ];
+        $newRuta = array($ruta => array(
+            "namespace" => $controller,
+            "action" => $action,
+            "method" => $method));
+
+        static::$rutas = array_merge(static::$rutas, $newRuta);
     }
+
 }
