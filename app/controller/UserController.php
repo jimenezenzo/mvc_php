@@ -17,8 +17,9 @@ class UserController
             }
         }
 
-        if (!empty($errores)) {
-            View::render("auth/login.html", ["errores" => $errores]);
+        if (isset($errores)) {
+            $_SESSION['errores'] = $errores;
+            header('Location: /login');
             die();
         }
 
